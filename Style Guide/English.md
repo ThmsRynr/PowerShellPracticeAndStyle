@@ -621,8 +621,6 @@ TODO
 
 ### Security
 
-#### Always use PSCredential for credentials/passwords
-
 You must avoid storing the password in a plain string object, or allowing the user to type them in as a parameter (where it might end up in the history or exposed to screen-scraper malware). The best method for this is to always deal with PSCredential objects (which store the Password in a SecureString).
 
 More specifically, you should always take PSCredentials as a parameter (and never call Get-Credential within your function) to allow the user the opportunity to reuse credentials stored in a variable.
@@ -640,13 +638,6 @@ $Credentials
 If you absolutely must pass a password in a plain string to a .Net API call or a third party library it is better to decrypt the credential as it is being passed instead of saving it in a variable.
 
 ```PowerShell
-# Get the cleartext password for a method call:
-$Insecure.SetPassword( $Credentials.GetNetworkCredential().Password )
-```
-
-#### Other Secure Strings
-
-
 For other strings that may be sensitive, use the SecureString type to protect the value of the string. Be sure to always provide an example for the user of passing the value using `Read-Host -AsSecureString`.
 
 Note, if you ever need to turn a SecureString into a string, you can use this method, but make sure to call ZeroFreeBSTR to avoid a memory leak:
