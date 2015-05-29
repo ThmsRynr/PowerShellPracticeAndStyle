@@ -674,12 +674,13 @@ $Credential = Import-CliXml -Path c:\creds\credential.xml
 
 ### PowerShell Supported Version
 
-* When working in an environment where there are multiple versions of PowerShell make sure to specify the lowest version your script will support by prividing a Requires statement at the top of the script.
+* When a script might be used in multiple versions of PowerShell (e.g.: when making it public, or when you work at a company with a mix of versions) make sure to specify the lowest version of PowerShell your script will support by prividing a requires statement at the top of the script.
 
 ```PowerShell
-#Requires -Version 2.0
+#requires -Version 2.0
 ```
-* When a module uses specific cmdlets or syntax that is only present on a specific minimun version of PowerShell in the module manifest ps1d file.
+
+* When a module uses specific cmdlets or syntax that requires a minimum version of PowerShell, specify that minimum in the module manifest .ps1d file as the `PowerShellVersion` (and not any other version number).
 
 ```PowerShell
 PowerShellVersion = '3.0'
